@@ -8,6 +8,7 @@ import SykmeldingSide from './pages/SykmeldingSide';
 import useAppStore from './store/useAppStore';
 import DataFetcher from './components/DataFetcher';
 import TidslinjeSide from './pages/TidslinjeSide';
+import KvitteringSide from './pages/KvitteringSide';
 
 const App: React.FC = () => {
     return (
@@ -15,8 +16,9 @@ const App: React.FC = () => {
             <DataFetcher>
                 <BrowserRouter>
                     <Switch>
-                        <Route exact path="/sykmeldinger" component={SykmeldingSide} />
+                        <Route path="/sykmeldinger/:id/kvittering" component={KvitteringSide} />
                         <Route path="/sykmeldinger/:id" component={SykmeldingSide} />
+                        <Route exact path="/sykmeldinger" component={SykmeldingSide} />
                         <Route path="/tidslinje" component={TidslinjeSide} />
                     </Switch>
                 </BrowserRouter>
