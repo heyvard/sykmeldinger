@@ -6,6 +6,12 @@ import Brodsmuler, { Brodsmule } from '../components/brodsmuler/brodsmuler';
 import useAppStore from '../store/useAppStore';
 import { Status } from '../types/sykmeldingDataTypes';
 import Spinner from 'nav-frontend-spinner';
+import BekreftetKvittering from '../components/kvittering/BekreftetKvittering';
+import SendtKvittering from '../components/kvittering/SendtKvittering';
+import FeilKvittering from '../components/kvittering/FeilKvittering';
+import FinnerIkkeKvittering from '../components/kvittering/FinnerIkkeKvittering';
+import { Panel } from 'nav-frontend-paneler';
+import Sidetopp from '../components/sidetopp/Sidetopp';
 
 const brodsmuler: Brodsmule[] = [
     {
@@ -62,7 +68,26 @@ const KvitteringSide = () => {
         return <p>failed to fetch status</p>;
     }
 
-    return <p>{'status: ' + sykmeldingStatus}</p>;
+    const KvitteringKomponent = (() => {
+        switch (sykmeldingStatus) {
+            case Status.BEKREFTET:
+                return <BekreftetKvittering />;
+            case Status.SENDT:
+                return <SendtKvittering />;
+            case Status.APEN:
+                return <FeilKvittering status={sykmeldingStatus} />;
+            default:
+                return <FinnerIkkeKvittering />;
+        }
+    })();
+
+    return (
+        <div className="limit">
+            <Brodsmuler brodsmuler={brodsmuler} />
+            <Sidetopp tekst={'Hva nå?'} />
+            <Panel>{KvitteringKomponent}</Panel>
+        </div>
+    );
 };
 
 export default KvitteringSide;

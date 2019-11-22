@@ -10,5 +10,5 @@ const mock = FetchMock.configure({
 
 mock.get('/syforest/sykmelding', nySykmeldingMock);
 mock.get('/syforest/sykmelding/avvist', avvistSykmeldingMock);
-mock.get('/syforest/sykmelding/:id/kvittering', { status: Status.AVVIST });
+mock.get('/syforest/sykmelding/:id/kvittering', { status: Status.SENDT });
 mock.get('/syforest/naermesteledere', naermesteLedereMock);

@@ -11,7 +11,11 @@ export class SykmeldingData {
 }
 
 export enum Status {
-    NY = 'ny',
-    AVVIST = 'avvist',
+    APEN = 'apen',
     AVBRUTT = 'avbrutt',
+    UTGATT = 'utgatt',
+    SENDT = 'sendt',
+    BEKREFTET = 'bekreftet',
+    SLETTET = 'slettet',
+    AVVIST = 'avvist',
 }

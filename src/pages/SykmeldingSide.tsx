@@ -35,7 +35,7 @@ const SykmeldingSide: React.FC = props => {
 
     const SykmeldingComponent = (() => {
         switch (sykmeldingStatus) {
-            case Status.NY:
+            case Status.APEN:
                 return <NySykmelding sykmelding={sykmelding} />;
             case Status.AVBRUTT:
                 return <AvbruttSykmelding sykmelding={sykmelding} />;
