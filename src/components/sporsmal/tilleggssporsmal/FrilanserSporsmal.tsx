@@ -58,15 +58,17 @@ const FrilanserSporsmal = ({
                     />
                 </Fieldset>
             </SkjemaGruppe>
-            <Egenmeldingsdager
-                vis={visEgenmeldingsdager}
-                register={register}
-                unregister={unregister}
-                setValue={setValue}
-                triggerValidation={triggerValidation}
-                isSubmitted={isSubmitted}
-                errors={errors}
-            />
+            {visEgenmeldingsdager && (
+                <Egenmeldingsdager
+                    register={register}
+                    unregister={unregister}
+                    setValue={setValue}
+                    triggerValidation={triggerValidation}
+                    isSubmitted={isSubmitted}
+                    errors={errors}
+                />
+            )}
+
             <SkjemaGruppe
                 feil={
                     errors.frilanserForsikring
