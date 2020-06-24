@@ -28,6 +28,7 @@ import plaster from '../components/Sykmeldingsopplysninger/plaster.svg';
 import plasterHover from '../components/Sykmeldingsopplysninger/plasterHover.svg';
 import arbeidsgiver from './arbeidsgiver.svg';
 import arbeidsgiverHover from './arbeidsgiverHover.svg';
+import Receipt from './Receipt/Receipt';
 
 interface SendtSykmeldingProps {
     sykmelding: Sykmelding;
@@ -36,7 +37,7 @@ interface SendtSykmeldingProps {
 const SendtSykmelding = ({ sykmelding }: SendtSykmeldingProps) => {
     return (
         <div className="sykmelding-container">
-            %KVITTERING% - Sendt, inaktiv søknad - Sendt, aktiv søknad - Sendt, ferdig (?)
+            <Receipt arbeidsgiver="Firma AS" orgnummer="001 001 001" datoSendt={new Date('2020-05-24T12:15:00.000Z')} />
             <Sykmeldingsopplysninger
                 title="Opplysninger fra sykmeldingen"
                 expandable
