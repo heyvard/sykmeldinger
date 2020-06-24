@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
 
+const dayNames = ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'];
+
 const maaneder = [
     'januar',
     'februar',
@@ -15,6 +17,16 @@ const maaneder = [
     'desember',
 ];
 const SKILLETEGN_PERIODE = '–';
+
+// Søndag 24. mai, kl 14:15
+export const toReadableDateWithTime = (date: Date): string => {
+    const day = dayNames[dayjs(date).day()];
+    const dateNumber = dayjs(date).date();
+    const month = maaneder[dayjs(date).month()];
+    const hour = dayjs(date).hour();
+    const minutes = dayjs(date).minute();
+    return `${day} ${dateNumber}. ${month}, kl ${hour}:${minutes}`;
+};
 
 export const tilLesbarPeriodeMedArstall = (fom: Date, tom: Date): string => {
     const erSammeAar = fom.getFullYear() === tom.getFullYear();
