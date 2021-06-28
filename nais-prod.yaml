@@ -40,8 +40,6 @@ spec:
       value: "https://flex-gateway.nav.no"
     - name: LOGIN_SERVICE_URL
       value: "https://loginservice.nav.no/login"
-    - name: LOGIN_SERVICE_REDIRECT_URL
-      value: "https://www.nav.no/syk/sykmeldinger"
     - name: AMPLITUDE_ENABLED
       value: "true"
     - name: SYKEPENGESOKNAD_URL

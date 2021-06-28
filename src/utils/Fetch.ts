@@ -5,14 +5,9 @@ import { logger } from './logger';
  * Redirects to Login Service if any request contains a 401 response.
  */
 class Fetch {
-    static loginServiceUrl = `${window._env_?.LOGIN_SERVICE_URL}?redirect=${window._env_?.LOGIN_SERVICE_REDIRECT_URL}`;
-
     /**
      * Make a GET request for the specified resource
      * Redirects to Login Service if request contains a 401 response.
-     * @param {string} url - The endpoint to call
-     * @param {(data: unknown) => Promise<T>} cb - The function to call after res.json()
-     * @return {Promise<T>} The data
      */
     static async authenticatedGet<T>(url: string, cb: (data: unknown) => Promise<T>): Promise<T> {
         const res = await fetch(url, { credentials: 'include' });
@@ -37,8 +32,9 @@ class Fetch {
             }
         }
         if (res.status === 401) {
-            window.location.href = this.loginServiceUrl;
-            logger.warn(`Session expired for request to ${url}`);
+            const redirectUrl = `${window._env_?.LOGIN_SERVICE_URL}?redirect=${window.location.href}`;
+            window.location.href = redirectUrl;
+            logger.warn(`Session expired for request to ${url}. Redirecting to ${redirectUrl}`);
             throw new Error('Sesjonen er utløpt. Vi videresender deg til innloggingssiden.');
         }
         const textResponse = await res.text();
@@ -52,9 +48,6 @@ class Fetch {
     /**
      * Make a POST request to the specified endpoint
      * Redirects to Login Service if request contains a 401 response.
-     * @param {string} url - The endpoint to call
-     * @param {T | undefined} body - The body to send with the request
-     * @return {string} The response from the http request parsed as text
      */
     static async authenticatedPost<T>(url: string, body?: T): Promise<string> {
         const res = await fetch(url, {
@@ -70,8 +63,9 @@ class Fetch {
             return textResponse;
         }
         if (res.status === 401) {
-            window.location.href = this.loginServiceUrl;
-            logger.warn(`Session expired for request to ${url}`);
+            const redirectUrl = `${window._env_?.LOGIN_SERVICE_URL}?redirect=${window.location.href}`;
+            window.location.href = redirectUrl;
+            logger.warn(`Session expired for request to ${url}. Redirecting to ${redirectUrl}`);
             throw new Error('Sesjonen er utløpt. Vi videresender deg til innloggingssiden.');
         }
         logger.error(`Request to ${url} resulted in statuscode: ${res.status} with message: ${textResponse}`);
