@@ -23,8 +23,9 @@ app.use(`${PUBLIC_URL}`, (_req, res, next) => {
     const hasAuthToken = cookie ? cookie.includes('selvbetjening-idtoken') : false;
 
     if (!hasAuthToken) {
-        console.log(`User not logged in, redirecting, ${_req.originalUrl}`);
-        res.redirect(302, `${process.env.LOGIN_SERVICE_URL}?redirect=${process.env.LOGIN_SERVICE_REDIRECT_URL}`);
+        const redirectUrl = `https://${_req.hostname}${_req.originalUrl}`;
+        console.log(`User not logged in, redirecting to ${redirectUrl}`);
+        res.redirect(302, `${process.env.LOGIN_SERVICE_URL}?redirect=${redirectUrl}`);
         return;
     }
 
